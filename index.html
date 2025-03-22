@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibecraft</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas"></canvas>
+
+    <!-- UI Elements -->
+    <div id="ui-container">
+      <div id="crosshair">+</div>
+      <div id="inventory-bar"></div>
+      <div id="stats">
+        <div id="day-counter">Day: 1</div>
+        <div id="time-indicator">☀️</div>
+        <div id="level">Level: 1</div>
+        <div id="experience">XP: 0</div>
+      </div>
+    </div>
+
+    <!-- Game Start Screen -->
+    <div id="start-screen" class="modal">
+      <div class="modal-content">
+        <h1>Vibecraft</h1>
+        <p>Survive 5 days on a mysterious island. Gather resources during the day, defend yourself at night!</p>
+        <button id="start-button">Start Game</button>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over-screen" class="modal hidden">
+      <div class="modal-content">
+        <h1>Game Over</h1>
+        <p id="game-over-message"></p>
+        <button id="restart-button">Try Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+  <!-- Additional three.js utilities -->
+  <script>
+    // Add WebGL detector if not included in the three.js version
+    THREE.WEBGL = {
+      isWebGLAvailable: function() {
+        try {
+          var canvas = document.createElement('canvas');
+          return !!(window.WebGLRenderingContext && 
+                   (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+        } catch (e) {
+          return false;
+        }
+      },
+      getWebGLErrorMessage: function() {
+        var element = document.createElement('div');
+        element.id = 'webgl-error-message';
+        element.style.fontFamily = 'monospace';
+        element.style.fontSize = '13px';
+        element.style.fontWeight = 'normal';
+        element.style.textAlign = 'center';
+        element.style.background = '#fff';
+        element.style.color = '#000';
+        element.style.padding = '1.5em';
+        element.style.width = '400px';
+        element.style.margin = '5em auto 0';
+        element.innerHTML = window.WebGLRenderingContext ? 
+          'Your graphics card does not seem to support WebGL.<br />' +
+          'Find out how to get it <a href="http://get.webgl.org/" target="_blank">here</a>.' :
+          'Your browser does not seem to support WebGL.<br/>' +
+          'Find out how to get it <a href="http://get.webgl.org/" target="_blank">here</a>.';
+        return element;
+      }
+    };
+  </script>
+
+  <!-- Game Scripts -->
+  <script src="JS/utils.js"></script>
+  <script src="JS/block.js"></script>
+  <script src="JS/blockIcons.js"></script>
+  <script src="JS/textureGenerator.js"></script>
+  <script src="JS/chunk.js"></script>
+  <script src="JS/world.js"></script>
+  <script src="JS/blockInteractionEffects.js"></script>
+  <script src="JS/player.js"></script>
+  <script src="JS/inventory.js"></script>
+  <script src="JS/enemies.js"></script>
+  <script src="JS/skyObjects.js"></script>
+  <script src="JS/dayNightCycle.js"></script>
+  <script src="JS/ui.js"></script>
+  <script src="JS/main.js"></script>
+</body>
+</html>
